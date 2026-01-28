@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/* ================= FLOATING NAVBAR ================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 72px;
+
+  background: #1f4f46;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px;
+
+  font-family: "Poppins", sans-serif;
+
+  animation: navFadeIn 0.9s ease-out;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* SOFT FADE (NO JUMP) */
+@keyframes navFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= LEFT ================= */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo {
+  font-size: 22px;
+}
+
+.nav-title {
+  color: #f3faf3;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.4px;
+}
+
+/* ================= CENTER ================= */
+.nav-center {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-center a {
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.nav-center a:hover {
+  color: #ffffff;
+}
+
+/* ACTIVE LINK */
+.active-link {
+  color: #ffffff;
+}
+
+.active-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #9be27a, #7ed957);
+  border-radius: 2px;
+}
+
+/* ================= PROFILE ================= */
+.profile-only {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.profile-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a5d6a7, #81c784);
+  color: #1b5e20;
+  font-weight: 700;
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.profile-name {
+  color: rgba(255,255,255,0.9);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* PROFILE HOVER (NO SHIFT) */
+.profile-only:hover .profile-circle {
+  transform: scale(1.06);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.45);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .nav-center {
+    display: none;
+  }
+}

@@ -1,0 +1,146 @@
+/* BACKGROUND */
+.doctors-bg {
+    min-height: 100vh;
+    background:
+      linear-gradient(rgba(18,40,26,0.78), rgba(18,40,26,0.78)),
+      url("../assets/ayurveda-bg.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* WRAPPER */
+  .doctors-wrapper {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 20px;
+  }
+  
+  /* GLASS CARD */
+  .doctors-glass {
+    background: rgba(60, 90, 65, 0.55);
+    backdrop-filter: blur(18px);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+  }
+  
+  /* HEADER */
+  .doctors-title {
+    color: #7ed957;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  
+  .doctors-sub {
+    color: rgba(126, 217, 87, 0.75);
+    margin-bottom: 24px;
+  }
+  
+  /* GRID */
+  .doctors-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  
+  /* DOCTOR CARD */
+  .doctor-card {
+    background: rgba(70, 105, 75, 0.6);
+    border-radius: 18px;
+    padding: 20px;
+    color: #e6ffe6;
+  }
+  
+  .doctor-card h4 {
+    color: #9be27a;
+    margin-bottom: 6px;
+  }
+  
+  /* SCHEDULE CARD */
+  .schedule-card {
+    background: rgba(70, 105, 75, 0.6);
+    border-radius: 18px;
+    padding: 20px;
+  }
+  
+  .schedule-card label {
+    display: block;
+    color: #c5f7a0;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  
+  /* DATE INPUT */
+  .schedule-card input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  /* SLOTS */
+  .slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .slot {
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: none;
+    background: rgba(126,217,87,0.3);
+    color: #1b3b22;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .slot.active {
+    background: linear-gradient(135deg, #7ed957, #9be27a);
+  }
+  
+  /* BOOK BUTTON */
+  .book-btn {
+    margin-top: 18px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg, #7ed957, #9be27a);
+    color: #1b3b22;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 800px) {
+    .doctors-grid {
+      grid-template-columns: 1fr;
+    }
+    /* BOOKED SLOT */
+.slot.booked {
+  background: rgba(255, 82, 82, 0.25);
+  color: #ffb3b3;
+  cursor: not-allowed;
+  font-weight: 600;
+}
+
+/* CURRENT APPOINTMENT BOX */
+.current-appointment {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.15);
+  font-size: 14px;
+}
+
+/* DISABLE INPUT LOOK */
+input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+  }

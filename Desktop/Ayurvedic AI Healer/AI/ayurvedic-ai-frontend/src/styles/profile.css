@@ -1,0 +1,215 @@
+.profile-bg {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(18,40,26,.85), rgba(18,40,26,.85)),
+    url("../assets/ayurveda-bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.profile-wrapper {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+}
+
+/* LEFT CARD */
+.profile-card {
+  background: rgba(60,90,65,.55);
+  backdrop-filter: blur(18px);
+  border-radius: 24px;
+  padding: 30px;
+  color: white;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#7ed957,#9be27a);
+  color: #1b3d2b;
+  font-size: 32px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 16px;
+}
+
+.profile-name {
+  text-align: center;
+}
+
+.profile-email {
+  text-align: center;
+  font-size: 14px;
+  opacity: .8;
+  margin-bottom: 20px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255,255,255,.08);
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.logout-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg,#ff8a65,#ff7043);
+  color: white;
+  font-weight: 600;
+}
+
+/* RIGHT SIDE */
+.profile-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.glass-section {
+  background: rgba(60,90,65,.55);
+  backdrop-filter: blur(18px);
+  border-radius: 24px;
+  padding: 24px;
+  color: white;
+}
+
+/* HISTORY */
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255,255,255,.08);
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+
+.history-item h4 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.history-item p {
+  font-size: 12px;
+  opacity: .85;
+}
+
+.history-date {
+  font-size: 11px;
+  opacity: .7;
+}
+
+/* ORDERS */
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255,255,255,.08);
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+
+.order-amount {
+  font-weight: 700;
+}
+
+.order-status {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.order-status.delivered {
+  background: #9be27a;
+  color: #1b3d2b;
+}
+
+.order-status.in-progress {
+  background: #ffd54f;
+  color: #3b2f00;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .profile-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,.08);
+    padding: 10px 14px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .detail-row input {
+    background: rgba(0,0,0,0.3);
+    border: none;
+    outline: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    width: 120px;
+    text-align: right;
+  }
+  
+  .label {
+    opacity: 0.85;
+  }
+  
+  .value {
+    font-weight: 500;
+  }
+  
+  /* EDIT BUTTONS */
+  .edit-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg,#7ed957,#9be27a);
+    color: #1b3d2b;
+    font-weight: 600;
+    margin-top: 16px;
+  }
+  
+  .edit-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  
+  .save-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg,#7ed957,#9be27a);
+    color: #1b3d2b;
+    font-weight: 600;
+  }
+  
+  .cancel-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    background: rgba(255,255,255,0.15);
+    color: white;
+  }
+}

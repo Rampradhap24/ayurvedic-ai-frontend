@@ -1,0 +1,61 @@
+/* ================= PAGE ANIMATION ================= */
+.page-animate {
+    animation: pageFade 0.8s ease both;
+  }
+  
+  @keyframes pageFade {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ================= GLASS CARD ================= */
+  .glass-card {
+    background: rgba(60, 90, 65, 0.55);
+    backdrop-filter: blur(18px);
+    border-radius: 26px;
+    box-shadow: 0 30px 60px rgba(0,0,0,.45);
+  }
+  
+  /* ================= GLASS WRAPPER ================= */
+  .glass-wrapper {
+    position: relative;
+    padding: 30px;
+  }
+  
+  /* ================= BACK BUTTON ================= */
+  .glass-back-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+  
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+  
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(10px);
+  
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    cursor: pointer;
+    transition: all 0.25s ease;
+    z-index: 10;
+  }
+  
+  .glass-back-btn:hover {
+    background: rgba(255,255,255,0.28);
+    transform: scale(1.08);
+  }
