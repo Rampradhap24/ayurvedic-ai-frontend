@@ -1,0 +1,321 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/* ================= GLOBAL ================= */
+.profile-bg {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(18, 40, 26, 0.75), rgba(18, 40, 26, 0.75)),
+    url("../assets/ayurveda-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.profile-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 32px;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 26px;
+}
+
+/* ================= LEFT PROFILE CARD ================= */
+.profile-card {
+  background: rgba(60, 90, 65, 0.55);
+  backdrop-filter: blur(18px);
+  border-radius: 22px;
+  padding: 26px;
+  color: #fff;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* Avatar */
+.profile-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #9be27a, #7ed957);
+  color: #1b5e20;
+  font-size: 28px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+/* Name & Email */
+.profile-name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.profile-email {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-bottom: 18px;
+}
+
+/* Profile Details */
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  gap: 10px;
+}
+
+.detail-row .label {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.detail-row .value {
+  font-weight: 500;
+}
+
+/* Inputs */
+.detail-row input,
+.detail-row select {
+  width: 150px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+/* Buttons */
+.edit-btn,
+.save-btn,
+.cancel-btn,
+.logout-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.edit-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.save-btn {
+  background: #7ed957;
+  color: #1b5e20;
+}
+
+.cancel-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  margin-top: 6px;
+}
+
+.logout-btn {
+  background: rgba(255, 80, 80, 0.85);
+  color: #fff;
+  margin-top: 22px;
+}
+
+/* ================= RIGHT SIDE ================= */
+.profile-right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Glass section */
+.glass-section {
+  background: rgba(60, 90, 65, 0.5);
+  backdrop-filter: blur(18px);
+  border-radius: 22px;
+  padding: 22px;
+  color: #fff;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* Section title */
+.glass-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* ================= PURCHASED MEDICINES SCROLL ================= */
+
+/* Limit height & scroll only this section */
+.profile-right .glass-section {
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Scrollbar */
+.profile-right .glass-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.profile-right .glass-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.profile-right .glass-section::-webkit-scrollbar-thumb {
+  background: rgba(126, 217, 87, 0.6);
+  border-radius: 8px;
+}
+
+.profile-right .glass-section::-webkit-scrollbar-thumb:hover {
+  background: rgba(126, 217, 87, 0.85);
+}
+
+/* ================= ORDER ITEMS ================= */
+.order-item {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.order-item:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
+}
+
+.order-item h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.order-item p {
+  font-size: 13px;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
+/* Right side */
+.order-right {
+  text-align: right;
+}
+
+.order-amount {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.order-status {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 14px;
+  background: rgba(126, 217, 87, 0.25);
+  color: #7ed957;
+}
+
+/* Empty text */
+.empty-text {
+  opacity: 0.75;
+  font-size: 14px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .profile-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-right .glass-section {
+    max-height: 360px;
+  }
+  /* ================= PURCHASED MEDICINES ================= */
+
+.purchased-scroll {
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* Scrollbar */
+.purchased-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.purchased-scroll::-webkit-scrollbar-thumb {
+  background: rgba(126, 217, 87, 0.6);
+  border-radius: 6px;
+}
+
+/* ORDER CARD */
+.order-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+/* HEADER */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  opacity: 0.85;
+  margin-bottom: 12px;
+}
+
+/* MEDICINE LIST */
+.medicine-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* MEDICINE ITEM */
+.medicine-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 14px;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.medicine-item:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+/* IMAGE */
+.medicine-item img {
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* INFO */
+.medicine-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.medicine-info p {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+/* PRICE */
+.medicine-price {
+  margin-left: auto;
+  font-weight: 700;
+  color: #9be27a;
+}
+}

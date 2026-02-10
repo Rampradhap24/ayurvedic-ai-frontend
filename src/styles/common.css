@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Marcellus&family=Inter:wght@300;400;500&display=swap");
+
+/* GLOBAL RESET – REMOVE WHITE BORDER */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* BACKGROUND */
+.bg-ayurveda {
+  min-height: 100vh;
+  width: 100%;
+  background:
+    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+    url("../assets/ayurveda-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ANIMATION WRAPPER */
+.nature-wrapper {
+  text-align: center;
+  animation: natureFade 5s ease forwards;
+}
+
+/* FADE ANIMATION */
+@keyframes natureFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}

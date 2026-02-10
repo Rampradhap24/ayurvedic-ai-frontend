@@ -1,0 +1,240 @@
+/* BACKGROUND */
+.inventory-bg {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(18,40,26,.8), rgba(18,40,26,.8)),
+    url("../assets/ayurveda-bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* WRAPPER */
+.inventory-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px;
+}
+
+/* FLOATING ACTION BAR */
+.inventory-action-bar {
+  position: sticky;
+  top: 80px;
+  z-index: 50;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+
+  margin-bottom: 20px;
+}
+
+/* ACTION BUTTON */
+.action-btn {
+  position: relative;
+  padding: 10px 16px;
+  border-radius: 18px;
+  background: rgba(60, 90, 65, 0.65);
+  backdrop-filter: blur(14px);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* PRIMARY (PAY) */
+.action-btn.primary {
+  background: linear-gradient(135deg, #7ed957, #9be27a);
+  color: #1b3d2b;
+  font-weight: 600;
+}
+
+/* BADGE */
+.action-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ff5252;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+/* PROMO BANNER */
+.promo-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #1f4f46, #2e6f63);
+  border-radius: 26px;
+  padding: 30px 40px;
+  margin-bottom: 32px;
+  color: white;
+}
+
+/* PROMO TEXT */
+.promo-text h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.promo-text p {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.promo-tag {
+  background: #d9c27c;
+  color: #2a2a2a;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* PROMO IMAGE */
+.promo-image img {
+  width: 220px;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+/* SEARCH HEADER */
+.inventory-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 28px;
+}
+
+/* SEARCH BOX */
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(60, 90, 65, 0.55);
+  backdrop-filter: blur(20px);
+  padding: 16px 20px;
+  border-radius: 20px;
+  width: 420px;
+}
+
+.search-icon {
+  font-size: 18px;
+  opacity: 0.75;
+}
+
+.search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.search-box input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+/* GRID */
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+
+/* MEDICINE CARD */
+.medicine-card {
+  position: relative;
+  background: rgba(60,90,65,.55);
+  backdrop-filter: blur(14px);
+  border-radius: 20px;
+  padding: 16px;
+  color: #ffffff;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.4);
+}
+
+.medicine-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.medicine-card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.price-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.price {
+  color: #9be27a;
+  font-weight: 700;
+}
+
+.mrp {
+  text-decoration: line-through;
+  opacity: .6;
+}
+
+.offer {
+  color: #a5ff7a;
+}
+
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #ede7ff;
+  color: #5e3ecf;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+button {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg,#7ed957,#9be27a);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.no-results {
+  color: #ffffff;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .promo-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .promo-image img {
+    width: 180px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+}

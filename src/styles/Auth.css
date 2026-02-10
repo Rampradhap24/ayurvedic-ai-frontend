@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@300;400;500&display=swap");
+
+/* ANIMATION */
+.auth-animate {
+  animation: authFade 1.2s ease forwards;
+}
+
+@keyframes authFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* GLASS CARD */
+.glass-card {
+  width: 380px;
+  padding: 36px 32px;        /* 🔥 reduced padding (100px was too much) */
+  border-radius: 22px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  color: #eaffea;
+  text-align: center;
+}
+
+/* TITLE */
+.auth-title {
+  font-family: "Marcellus", serif;
+  font-size: 26px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  color: #eaffea;
+}
+
+/* SUB TITLE */
+.auth-sub {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  margin-bottom: 26px;
+  opacity: 0.85;
+}
+
+/* LANGUAGE SELECT */
+.lang-select {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+}
+
+.lang-select select {
+  background: rgba(255,255,255,0.85);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* INPUT FIELD */
+.field {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.field input {
+  width: 100%;
+  padding: 14px 42px 14px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: transparent;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: #b7ffbe;
+}
+
+/* FLOATING LABEL */
+.field label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: #e0e0e0;
+  pointer-events: none;
+  transition: 0.25s ease;
+}
+
+.field input:focus + label,
+.field input:valid + label {
+  top: -7px;
+  font-size: 11px;
+  color: #b7ffbe;
+  background: rgba(0,0,0,0.35);
+  padding: 0 6px;
+  border-radius: 6px;
+}
+
+/* PASSWORD ICON */
+.eye {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #7ed957, #5fbf6a);
+  color: #103820;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+/* SWITCH */
+.switch {
+  margin-top: 18px;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.switch span {
+  color: #b7ffbe;
+  cursor: pointer;
+  font-weight: 500;
+}

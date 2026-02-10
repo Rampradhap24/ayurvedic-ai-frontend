@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/* ================= GLOBAL ================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+/* ================= BACKGROUND ================= */
+.admin-bg {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(18,40,26,.88), rgba(18,40,26,.88)),
+    url("../assets/ayurveda-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 40px 20px;
+}
+
+/* ================= PANEL ================= */
+.admin-panel {
+  max-width: 1200px;
+  margin: auto;
+  color: #ffffff;
+}
+
+/* ================= TITLES ================= */
+.admin-panel h2 {
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.admin-panel .sub {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-bottom: 28px;
+}
+
+/* ================= ADMIN DASHBOARD GRID ================= */
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+/* ================= DASHBOARD CARD ================= */
+.admin-card {
+  background: rgba(60, 90, 65, 0.55);
+  backdrop-filter: blur(18px);
+  border-radius: 26px;
+  padding: 26px;
+  cursor: pointer;
+  box-shadow: 0 18px 40px rgba(0,0,0,.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.admin-card span {
+  display: block;
+  font-size: 13px;
+  opacity: 0.8;
+  margin-top: 8px;
+}
+
+.admin-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0,0,0,.6);
+}
+
+/* ================= ADMIN LOGIN ================= */
+.admin-login {
+  max-width: 380px;
+  margin: auto;
+  background: rgba(60, 90, 65, 0.55);
+  backdrop-filter: blur(18px);
+  padding: 36px;
+  border-radius: 28px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.45);
+  text-align: center;
+}
+
+.admin-login input {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+}
+
+/* ================= BUTTONS ================= */
+.admin-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg,#7ed957,#9be27a);
+  color: #1b3d2b;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logout-btn {
+  padding: 10px 18px;
+  border-radius: 14px;
+  border: none;
+  background: #ff6b6b;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* ================= USERS / INVENTORY / ORDERS ================= */
+.admin-table {
+  margin-top: 20px;
+}
+
+/* CARD ROW */
+.row-card {
+  background: rgba(60, 90, 65, 0.55);
+  backdrop-filter: blur(16px);
+  padding: 22px;
+  border-radius: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.4);
+}
+
+.row-card h4 {
+  margin-bottom: 14px;
+  font-size: 16px;
+}
+
+/* INPUTS */
+.row-card input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+}
+
+/* LABEL */
+.row-card label {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+/* ================= CONSULTATION HISTORY ================= */
+.consult-card p {
+  font-size: 14px;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+/* ================= ORDERS ================= */
+.order-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-status {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.order-status.paid {
+  background: #7ed957;
+  color: #1b3d2b;
+}
+
+.order-status.pending {
+  background: #ffb703;
+  color: #1b1b1b;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .admin-panel h2 {
+    font-size: 22px;
+  }
+
+  .admin-card {
+    padding: 22px;
+  }
+}

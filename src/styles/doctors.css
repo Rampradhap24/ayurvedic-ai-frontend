@@ -1,0 +1,207 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+/* ================= PAGE ================= */
+.doctor-page {
+  min-height: calc(100vh - 72px);
+  background:
+    linear-gradient(rgba(18, 40, 26, 0.78), rgba(18, 40, 26, 0.78)),
+    url("../assets/ayurveda-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 40px 24px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ================= CONTAINER ================= */
+.doctor-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 24px;
+}
+
+/* ================= COMMON GLASS ================= */
+.doctor-card,
+.booking-card,
+.history-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 24px;
+  color: #ffffff;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+}
+
+/* ================= DOCTOR INFO ================= */
+.doctor-avatar {
+  font-size: 56px;
+  margin-bottom: 14px;
+}
+
+.doctor-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.special {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+
+.exp {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-top: 6px;
+}
+
+/* ================= BOOKING ================= */
+.booking-card h3 {
+  margin-bottom: 12px;
+}
+
+.booking-card label {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-top: 12px;
+  display: block;
+}
+
+.booking-card input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  margin: 8px 0 14px;
+  font-family: inherit;
+}
+
+/* ================= SLOTS ================= */
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.slot {
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.slot:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.slot.active {
+  background: linear-gradient(135deg, #9be27a, #7ed957);
+  color: #114d2f;
+  font-weight: 600;
+}
+
+/* ================= BOOK BUTTON ================= */
+.book-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #9be27a, #7ed957);
+  color: #114d2f;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.book-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ================= HISTORY ================= */
+.history-card h3 {
+  margin-bottom: 12px;
+}
+
+/* SCROLL CONTAINER */
+.appointment-history {
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* SCROLLBAR */
+.appointment-history::-webkit-scrollbar {
+  width: 6px;
+}
+
+.appointment-history::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+
+.appointment-history::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #9be27a, #7ed957);
+  border-radius: 10px;
+}
+
+/* HISTORY ITEM */
+.appointment-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 14px;
+  border-radius: 16px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.appointment-item:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.appointment-item h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.appointment-item p {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* TIME */
+.time {
+  text-align: right;
+  font-size: 12px;
+  opacity: 0.9;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* EMPTY STATE */
+.appointment-empty {
+  opacity: 0.7;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .doctor-container {
+    grid-template-columns: 1fr;
+  }
+
+  .appointment-history {
+    max-height: 260px;
+  }
+}
