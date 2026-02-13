@@ -1,11 +1,29 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
-/* DB */
+/* ================= FIX __dirname (ES MODULE) ================= */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+/* ================= LOAD ROOT .env ================= */
+/*
+Your .env is located at:
+ayurvedic-ai-frontend/.env
+
+server.js is located at:
+ayurvedic-ai-frontend/src/backend/
+
+So we go 2 levels up.
+*/
+dotenv.config({
+  path: path.resolve(__dirname, "../../.env"),
+});
+
+/* ================= IMPORTS ================= */
 import connectDB from "./config/db.js";
-
-/* SEEDER */
 import seedInventory from "./seed/inventory.seed.js";
 
 /* ROUTES */
@@ -18,21 +36,27 @@ import appointmentRoutes from "./routes/appointment.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
 
-dotenv.config();
-
+/* ================= CREATE APP ================= */
 const app = express();
+
+/* ================= DEBUG ENV ================= */
+if (!process.env.OPENAI_API_KEY) {
+  console.warn("❌ OPENAI_API_KEY is missing");
+} else {
+  console.log("OPENAI KEY LOADED:", process.env.OPENAI_API_KEY ? "YES" : "NO");
+}
 
 /* ================= MIDDLEWARE ================= */
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend URL
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
 
 app.use(express.json());
 
-/* ================= TEST ROUTE ================= */
+/* ================= HEALTH CHECK ================= */
 app.get("/", (req, res) => {
   res.json({ message: "🌿 Ayurvedic AI Backend Running" });
 });
@@ -47,21 +71,32 @@ app.use("/api/appointment", appointmentRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
+/* ================= GLOBAL ERROR HANDLER ================= */
+app.use((err, req, res, next) => {
+  console.error("🔥 Server Error:", err.stack);
+  res.status(500).json({ message: "Internal Server Error" });
+});
+
 /* ================= START SERVER ================= */
 const PORT = process.env.PORT || 5001;
 
-connectDB()
-  .then(() => {
+const startServer = async () => {
+  try {
+    await connectDB();
     console.log("✅ MongoDB connected");
 
     /* 🔥 AUTO-SYNC INVENTORY */
-    seedInventory();
+    await seedInventory();
+    console.log("✅ Inventory synced");
 
     app.listen(PORT, () => {
-      console.log(`🚀 Backend running on port ${PORT}`);
+      console.log(`🚀 Backend running on http://localhost:${PORT}`);
     });
-  })
-  .catch((err) => {
-    console.error("❌ DB connection failed:", err.message);
+
+  } catch (err) {
+    console.error("❌ Failed to start server:", err.message);
     process.exit(1);
-  });
+  }
+};
+
+startServer();

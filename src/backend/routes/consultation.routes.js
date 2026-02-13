@@ -7,10 +7,7 @@ import {
 
 const router = express.Router();
 
-/* SAVE AI CONSULTATION */
 router.post("/", protect, saveConsultation);
-
-/* GET MY CONSULTATIONS */
 router.get("/my", protect, getMyConsultations);
 
 export default router;
