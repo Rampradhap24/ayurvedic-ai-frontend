@@ -1,0 +1,169 @@
+[
+  {
+    "parameter": "Blood Viscosity",
+    "category": "Cardiovascular and Cerebrovascular",
+    "kevaMedicines": [
+      "BP Care",
+      "Heart Care"
+    ]
+  },
+  {
+    "parameter": "Cholesterol Crystal",
+    "category": "Cardiovascular and Cerebrovascular",
+    "kevaMedicines": [
+      "Cholestrium Care",
+      "Heart Care"
+    ]
+  },
+  {
+    "parameter": "Blood Fat",
+    "category": "Cardiovascular and Cerebrovascular",
+    "kevaMedicines": [
+      "Heart Care",
+      "Garlic Care"
+    ]
+  },
+  {
+    "parameter": "Vascular Resistance",
+    "category": "Cardiovascular and Cerebrovascular",
+    "kevaMedicines": [
+      "Heart Care"
+    ]
+  },
+  {
+    "parameter": "Vascular Elasticity",
+    "category": "Cardiovascular and Cerebrovascular",
+    "kevaMedicines": [
+      "Heart Care"
+    ]
+  },
+  {
+    "parameter": "Myocardial Blood Demand",
+    "category": "Cardiovascular and Cerebrovascular",
+    "kevaMedicines": [
+      "Hridya Amrit"
+    ]
+  },
+  {
+    "parameter": "Myocardial Blood Perfusion Volume",
+    "category": "Cardiovascular and Cerebrovascular",
+    "kevaMedicines": [
+      "Heart Care",
+      "Hridya Amrit"
+    ]
+  },
+  {
+    "parameter": "Stroke Volume",
+    "category": "Cardiovascular and Cerebrovascular",
+    "kevaMedicines": [
+      "Heart Care",
+      "Hridya Amrit"
+    ]
+  },
+  {
+    "parameter": "Left Ventricular Ejection Impedance",
+    "category": "Cardiovascular and Cerebrovascular",
+    "kevaMedicines": [
+      "Heart Care",
+      "Hridya Amrit"
+    ]
+  },
+  {
+    "parameter": "Left Ventricular Effective Pump Power",
+    "category": "Cardiovascular and Cerebrovascular",
+    "kevaMedicines": [
+      "Heart Care"
+    ]
+  },
+  {
+    "parameter": "Insulin Secretion Coefficient",
+    "category": "Blood Sugar",
+    "kevaMedicines": [
+      "Anti Sugar",
+      "Sugar Control",
+      "NT Diaba"
+    ]
+  },
+  {
+    "parameter": "Blood Sugar Coefficient",
+    "category": "Blood Sugar",
+    "kevaMedicines": [
+      "Anti Diabetic",
+      "Anti Sugar",
+      "Sugar Control"
+    ]
+  },
+  {
+    "parameter": "Urine Sugar Coefficient",
+    "category": "Blood Sugar",
+    "kevaMedicines": [
+      "NT Diaba",
+      "Sugar Control"
+    ]
+  },
+  {
+    "parameter": "Lymph Node Index",
+    "category": "Immune System",
+    "kevaMedicines": [
+      "Acidity Care Drops"
+    ]
+  },
+  {
+    "parameter": "Tonsil Immune Index",
+    "category": "Immune System",
+    "kevaMedicines": [
+      "Tonsiwin Syrup"
+    ]
+  },
+  {
+    "parameter": "Immunoglobulin Index",
+    "category": "Immune System",
+    "kevaMedicines": [
+      "Immunorich"
+    ]
+  },
+  {
+    "parameter": "Vitamin A",
+    "category": "Vitamins",
+    "kevaMedicines": [
+      "Multivitamin",
+      "Daily Super Plus"
+    ]
+  },
+  {
+    "parameter": "Vitamin C",
+    "category": "Vitamins",
+    "kevaMedicines": [
+      "High Vitamin C"
+    ]
+  },
+  {
+    "parameter": "Vitamin D3",
+    "category": "Vitamins",
+    "kevaMedicines": [
+      "High Solar Energy Plus"
+    ]
+  },
+  {
+    "parameter": "Free Thyroxine (High)",
+    "category": "Thyroid",
+    "kevaMedicines": [
+      "Thyroid Care"
+    ]
+  },
+  {
+    "parameter": "Free Thyroxine (Low)",
+    "category": "Thyroid",
+    "kevaMedicines": [
+      "Thyroid Care"
+    ]
+  },
+  {
+    "parameter": "Fatty Acid Balance",
+    "category": "Fatty Acids",
+    "kevaMedicines": [
+      "Flax Seed",
+      "Garlic Care"
+    ]
+  }
+]

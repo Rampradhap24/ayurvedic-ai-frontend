@@ -1,39 +1,137 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 import Navbar from "../components/Navbar";
 import "../styles/consultation.css";
 
 function Consultation() {
   const navigate = useNavigate();
+  const chatEndRef = useRef(null);
+  const { addToCart } = useCart();
 
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [inventory, setInventory] = useState([]);
 
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      text:
-        "Hello 👋 I am your Ayurvedic AI assistant. Please describe your symptoms.",
-    },
-  ]);
-
-  /* 🔐 AUTH GUARD */
+  /* ================= AUTH ================= */
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) navigate("/login");
   }, [navigate]);
 
-  /* SEND MESSAGE */
+  /* ================= LOAD INVENTORY ================= */
+  useEffect(() => {
+    const loadInventory = async () => {
+      const res = await fetch("http://localhost:5001/api/inventory");
+      const data = await res.json();
+      if (Array.isArray(data)) setInventory(data);
+    };
+    loadInventory();
+  }, []);
+
+  /* ================= LOAD CHAT HISTORY ================= */
+  useEffect(() => {
+    const loadHistory = async () => {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(
+        "http://localhost:5001/api/consultation/my",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const data = await res.json();
+
+      if (!Array.isArray(data) || data.length === 0) {
+        setMessages([
+          {
+            role: "assistant",
+            text:
+              "Hello 👋 I am your Ayurvedic AI assistant. Please describe your symptoms.",
+          },
+        ]);
+        return;
+      }
+
+      const formatted = [];
+
+      data.reverse().forEach((consult) => {
+        formatted.push({
+          role: "date",
+          text: new Date(consult.createdAt).toLocaleString(),
+        });
+
+        consult.messages.forEach((msg) => {
+          formatted.push({
+            role: msg.role,
+            text: msg.content,
+          });
+        });
+      });
+
+      setMessages(formatted);
+    };
+
+    loadHistory();
+  }, []);
+
+  /* ================= AUTO SCROLL ================= */
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  /* ================= RENDER MESSAGE SMART ================= */
+  const renderMessage = (text) => {
+    if (!text) return null;
+
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+
+    return parts.map((part, index) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        const medName = part.replace(/\*\*/g, "");
+
+        const product = inventory.find(
+          (item) =>
+            item.name.toLowerCase() === medName.toLowerCase()
+        );
+
+        if (product) {
+          return (
+            <span key={index} className="medicine-wrapper">
+              <span className="clickable-med">
+                {medName}
+              </span>
+
+              <button
+                className="mini-buy-btn"
+                onClick={() => {
+                  addToCart(product);
+                }}
+              >
+                🛒
+              </button>
+            </span>
+          );
+        }
+
+        return (
+          <b key={index} className="med-highlight">
+            {medName}
+          </b>
+        );
+      }
+
+      return <span key={index}>{part}</span>;
+    });
+  };
+
+  /* ================= SEND MESSAGE ================= */
   const sendMessage = async () => {
     if (!input.trim()) return;
 
     const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/login");
-      return;
-    }
-
-    /* USER MESSAGE */
     const userText = input;
 
     setMessages((prev) => [
@@ -44,58 +142,62 @@ function Consultation() {
     setInput("");
     setLoading(true);
 
-    /* 🌿 MOCK AI RESPONSE (replace later with real AI) */
-    const aiText = `🩺 Analysis:
-Possible digestive imbalance (Agni).
+    try {
+      const res = await fetch(
+        "http://localhost:5001/api/consultation",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ message: userText }),
+        }
+      );
 
-💊 Medicines:
-• Triphala (night)
-• Hingvastak Churna (before meals)
+      const data = await res.json();
 
-🥗 Diet:
-• Warm water
-• Rice
-• Curd
-• Banana
+      if (!res.ok) throw new Error(data.message);
 
-🧘 Exercise:
-• Vajrasana
-• Morning walk
-• Pranayama`;
-
-    setMessages((prev) => [
-      ...prev,
-      { role: "assistant", text: aiText },
-    ]);
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", text: data.reply },
+      ]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          text:
+            "⚠ Sorry, I couldn't process your request. Please try again.",
+        },
+      ]);
+    }
 
     setLoading(false);
+  };
 
-    /* 📦 SAVE TO MONGODB */
-    try {
-      await fetch("http://localhost:5001/api/consultation", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          symptoms: userText,
-          aiResponse: aiText,
-          recommendedMedicines: [
-            "Triphala",
-            "Hingvastak Churna",
-          ],
-          recommendedFoods: [
-            "Warm water",
-            "Rice",
-            "Curd",
-            "Banana",
-          ],
-        }),
-      });
-    } catch (err) {
-      console.error("❌ Failed to save consultation", err);
-    }
+  /* ================= CLEAR CHAT ================= */
+  const clearChat = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!window.confirm("Clear chat history?")) return;
+
+    await fetch(
+      "http://localhost:5001/api/consultation/clear",
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    setMessages([
+      {
+        role: "assistant",
+        text:
+          "Hello 👋 I am your Ayurvedic AI assistant. Please describe your symptoms.",
+      },
+    ]);
   };
 
   return (
@@ -105,25 +207,45 @@ Possible digestive imbalance (Agni).
       <div className="consult-bg page-animate">
         <div className="consult-glass">
 
-          {/* 💬 CHAT */}
+          <div className="consult-header">
+            <h3>🌿 Ayurvedic AI Consultation</h3>
+            <button
+              className="clear-chat-btn"
+              onClick={clearChat}
+            >
+              🗑 Clear Chat
+            </button>
+          </div>
+
           <div className="consult-messages">
-            {messages.map((msg, index) => (
-              <div
-                key={`${msg.role}-${index}`}
-                className={`consult-msg ${msg.role}`}
-              >
-                {msg.text}
-              </div>
-            ))}
+            {messages.map((msg, index) => {
+              if (msg.role === "date") {
+                return (
+                  <div key={index} className="chat-date">
+                    {msg.text}
+                  </div>
+                );
+              }
+
+              return (
+                <div
+                  key={index}
+                  className={`consult-msg ${msg.role}`}
+                >
+                  {renderMessage(msg.text)}
+                </div>
+              );
+            })}
 
             {loading && (
               <div className="consult-msg assistant">
                 🌿 Analyzing your symptoms...
               </div>
             )}
+
+            <div ref={chatEndRef} />
           </div>
 
-          {/* ✍️ INPUT */}
           <div className="consult-input">
             <textarea
               placeholder="Describe your symptoms..."

@@ -1,5 +1,6 @@
 import Consultation from "../models/Consultation.js";
 import { getAIResponse } from "../services/ai.service.js";
+import { findParameterMatch } from "../services/parameter.service.js";
 
 /* ================= SAVE CONSULTATION ================= */
 export const saveConsultation = async (req, res) => {
@@ -10,18 +11,48 @@ export const saveConsultation = async (req, res) => {
       return res.status(400).json({ message: "Message required" });
     }
 
-    const aiReply = await getAIResponse(message);
+    /* 1️⃣ AI explanation only */
+    const aiReplyRaw = await getAIResponse(message);
 
+    if (!aiReplyRaw) {
+      return res.status(500).json({
+        message: "AI did not generate a response",
+      });
+    }
+
+    /* 2️⃣ Match parameter from JSON */
+    const matchedParameter = findParameterMatch(message);
+
+    let kevaMedicines = [];
+
+    if (matchedParameter) {
+      kevaMedicines = matchedParameter.kevaMedicines;
+    }
+
+    /* 3️⃣ Append controlled medicines */
+    let finalReply = aiReplyRaw;
+
+    if (kevaMedicines.length > 0) {
+      finalReply += `
+
+Keva Medicines:
+${kevaMedicines.map((med) => `• **${med}**`).join("\n")}
+`;
+    }
+
+    /* 4️⃣ Save to DB */
     const consultation = await Consultation.create({
       user: req.user._id,
       messages: [
         { role: "user", content: message },
-        { role: "assistant", content: aiReply || "No response generated" },
+        { role: "assistant", content: finalReply },
       ],
+      medicinesMentioned: kevaMedicines,
     });
 
     res.json({
-      reply: aiReply,
+      reply: finalReply,
+      medicines: kevaMedicines,
       consultationId: consultation._id,
     });
 
@@ -41,5 +72,19 @@ export const getMyConsultations = async (req, res) => {
     res.json(consultations);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+};
+
+/* ================= CLEAR CHAT ================= */
+export const clearMyConsultations = async (req, res) => {
+  try {
+    await Consultation.deleteMany({
+      user: req.user._id,
+    });
+
+    res.json({ message: "Chat history cleared successfully" });
+  } catch (err) {
+    console.error("Clear chat error:", err);
+    res.status(500).json({ message: "Failed to clear chat" });
   }
 };

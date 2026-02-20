@@ -1,5 +1,20 @@
 import mongoose from "mongoose";
 
+const messageSchema = new mongoose.Schema(
+  {
+    role: {
+      type: String,
+      enum: ["user", "assistant"],
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+  },
+  { _id: false }
+);
+
 const consultationSchema = new mongoose.Schema(
   {
     user: {
@@ -7,25 +22,11 @@ const consultationSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    messages: [messageSchema],
 
-    messages: [
-      {
-        role: {
-          type: String,
-          enum: ["user", "assistant"],
-          required: true,
-        },
-        content: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
+    /* ✅ Extracted Medicines */
+    medicinesMentioned: [String],
 
-    aiSummary: String,      // short diagnosis
-    recommendedMedicines: [String],
-    recommendedFoods: [String],
-    recommendedExercises: [String],
   },
   { timestamps: true }
 );
