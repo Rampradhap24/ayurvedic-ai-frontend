@@ -18,38 +18,99 @@ import Success from "./inventory/Success";
 /* ================= ADMIN PAGES ================= */
 import AdminLogin from "./admin/AdminLogin";
 import AdminDashboard from "./admin/AdminDashboard";
+import ReportsAdmin from "./admin/ReportsAdmin";
 import UsersAdmin from "./admin/UsersAdmin";
 import InventoryAdmin from "./admin/InventoryAdmin";
 import ConsultationsAdmin from "./admin/ConsultationsAdmin";
 import OrdersAdmin from "./admin/OrdersAdmin";
+import AdminProtectedRoute from "./admin/AdminProtectedRoute";
 
 function App() {
   return (
     <Routes>
-      {/* -------- PUBLIC -------- */}
+
+      {/* ================= PUBLIC ================= */}
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 
-      {/* -------- USER -------- */}
+      {/* ================= USER ================= */}
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/consultation" element={<Consultation />} />
       <Route path="/doctors" element={<Doctors />} />
       <Route path="/profile" element={<Profile />} />
 
-      {/* -------- INVENTORY -------- */}
+      {/* ================= INVENTORY ================= */}
       <Route path="/inventory" element={<Inventory />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/payment" element={<Payment />} />
       <Route path="/success" element={<Success />} />
 
-      {/* -------- ADMIN -------- */}
+      {/* ================= ADMIN ================= */}
+
+      {/* Admin Login (Public) */}
       <Route path="/admin-login" element={<AdminLogin />} />
-      <Route path="/admin" element={<AdminDashboard />} />
-      <Route path="/admin/users" element={<UsersAdmin />} />
-      <Route path="/admin/inventory" element={<InventoryAdmin />} />
-      <Route path="/admin/consultations" element={<ConsultationsAdmin />} />
-      <Route path="/admin/orders" element={<OrdersAdmin />} />
+
+      {/* Admin Dashboard */}
+      <Route
+        path="/admin/dashboard"
+        element={
+          <AdminProtectedRoute>
+            <AdminDashboard />
+          </AdminProtectedRoute>
+        }
+      />
+
+      {/* Admin Reports */}
+      <Route
+        path="/admin/reports"
+        element={
+          <AdminProtectedRoute>
+            <ReportsAdmin />
+          </AdminProtectedRoute>
+        }
+      />
+
+      {/* Admin Users */}
+      <Route
+        path="/admin/users"
+        element={
+          <AdminProtectedRoute>
+            <UsersAdmin />
+          </AdminProtectedRoute>
+        }
+      />
+
+      {/* Admin Inventory */}
+      <Route
+        path="/admin/inventory"
+        element={
+          <AdminProtectedRoute>
+            <InventoryAdmin />
+          </AdminProtectedRoute>
+        }
+      />
+
+      {/* Admin Consultations */}
+      <Route
+        path="/admin/consultations"
+        element={
+          <AdminProtectedRoute>
+            <ConsultationsAdmin />
+          </AdminProtectedRoute>
+        }
+      />
+
+      {/* Admin Orders */}
+      <Route
+        path="/admin/orders"
+        element={
+          <AdminProtectedRoute>
+            <OrdersAdmin />
+          </AdminProtectedRoute>
+        }
+      />
+
     </Routes>
   );
 }

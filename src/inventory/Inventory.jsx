@@ -1,14 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-import { medicines } from "./data";
+import { medicines as staticMedicines } from "./data"; // 🔥 keep this
 import "./inventory.css";
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 
 function Inventory() {
   const [search, setSearch] = useState("");
+  const [medicines, setMedicines] = useState([]); // dynamic list
   const { cart, addToCart } = useCart();
   const navigate = useNavigate();
+
+  /* ================= FETCH INVENTORY FROM BACKEND ================= */
+  useEffect(() => {
+    fetch("http://localhost:5001/api/inventory")
+      .then((res) => res.json())
+      .then((dbData) => {
+
+        const mergedData = dbData.map((item) => {
+          const staticMatch = staticMedicines.find(
+            (med) =>
+              med.name.toLowerCase() === item.name.toLowerCase()
+          );
+
+          return {
+            ...item,
+            image: staticMatch?.image || item.image, // use static image first
+          };
+        });
+
+        setMedicines(mergedData);
+      })
+      .catch((err) => console.error("Inventory error:", err));
+  }, []);
 
   const filteredMedicines = medicines.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase())
@@ -18,11 +42,11 @@ function Inventory() {
     <>
       <Navbar />
 
-      {/* ✅ INVENTORY BACKGROUND */}
+      {/* ✅ INVENTORY BACKGROUND (UNCHANGED) */}
       <div className="inventory-bg">
         <div className="inventory-wrapper">
 
-          {/* ✅ FLOATING CART + PAYMENT BAR (INVENTORY ONLY) */}
+          {/* ✅ FLOATING CART + PAYMENT BAR (UNCHANGED) */}
           <div className="inventory-action-bar">
             <div
               className="action-btn"
@@ -42,7 +66,7 @@ function Inventory() {
             </div>
           </div>
 
-          {/* 🔥 PROMO BANNER */}
+          {/* 🔥 PROMO BANNER (UNCHANGED) */}
           <div className="promo-banner">
             <div className="promo-text">
               <span className="promo-tag">JUST LAUNCHED</span>
@@ -61,7 +85,7 @@ function Inventory() {
             </div>
           </div>
 
-          {/* 🔍 SEARCH BAR */}
+          {/* 🔍 SEARCH BAR (UNCHANGED) */}
           <div className="inventory-header">
             <div className="search-box">
               <span className="search-icon">🔍</span>
@@ -74,34 +98,36 @@ function Inventory() {
             </div>
           </div>
 
-          {/* 🧴 PRODUCT GRID */}
+          {/* 🧴 PRODUCT GRID (UNCHANGED UI) */}
           <div className="inventory-grid">
             {filteredMedicines.length === 0 ? (
               <p className="no-results">No medicines found</p>
             ) : (
               filteredMedicines.map((item) => (
-                <div className="medicine-card" key={item.id}>
+                <div className="medicine-card" key={item._id}>
 
-                  {item.badge && (
-                    <span className="badge">{item.badge}</span>
-                  )}
-
-                  <img src={item.image} alt={item.name} />
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    onError={(e) =>
+                      (e.target.src =
+                        "https://via.placeholder.com/300x300?text=No+Image")
+                    }
+                  />
 
                   <h4>{item.name}</h4>
 
                   <div className="price-row">
                     <span className="price">₹{item.price}</span>
-                    <span className="mrp">₹{item.mrp}</span>
-                    {item.offer && (
-                      <span className="offer">{item.offer}</span>
-                    )}
                   </div>
 
                   <button
+                    disabled={item.stock === 0}
                     onClick={() => addToCart(item)}
                   >
-                    Add to Cart
+                    {item.stock === 0
+                      ? "Out of Stock"
+                      : "Add to Cart"}
                   </button>
 
                 </div>

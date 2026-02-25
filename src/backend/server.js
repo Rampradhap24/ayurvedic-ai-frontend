@@ -25,10 +25,10 @@ dotenv.config({
 /* ================= IMPORTS ================= */
 import connectDB from "./config/db.js";
 import seedInventory from "./seed/inventory.seed.js";
-
+import seedAdmin from "./seed/admin.seed.js";
 /* ROUTES */
 import authRoutes from "./routes/auth.routes.js";
-import adminRoutes from "./routes/admin.routes.js";
+import adminAuthRoutes from "./routes/adminAuthRoutes.js";
 import inventoryRoutes from "./routes/inventory.routes.js";
 import consultationRoutes from "./routes/consultation.routes.js";
 import profileRoutes from "./routes/profile.routes.js";
@@ -62,8 +62,8 @@ app.get("/", (req, res) => {
 });
 
 /* ================= API ROUTES ================= */
-app.use("/api/auth", authRoutes);
-app.use("/api/admin", adminRoutes);
+app.use("/api/auth", authRoutes);   // user login
+app.use("/admin", adminAuthRoutes); // admin login
 app.use("/api/inventory", inventoryRoutes);
 app.use("/api/consultation", consultationRoutes);
 app.use("/api/profile", profileRoutes);
@@ -87,8 +87,7 @@ const startServer = async () => {
 
     /* 🔥 AUTO-SYNC INVENTORY */
     await seedInventory();
-    console.log("✅ Inventory synced");
-
+    await seedAdmin();
     app.listen(PORT, () => {
       console.log(`🚀 Backend running on http://localhost:${PORT}`);
     });

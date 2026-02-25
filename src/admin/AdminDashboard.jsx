@@ -4,37 +4,42 @@ import "../styles/admin.css";
 function AdminDashboard() {
   const navigate = useNavigate();
 
+  const logout = () => {
+    localStorage.removeItem("admin");
+    navigate("/admin-login");
+  };
+
   return (
     <div className="admin-bg">
       <div className="admin-panel">
-
-        <h2>Admin Control Panel</h2>
-        <p className="sub">Ayurvedic AI Healer – System Management</p>
+        <h2>Admin Dashboard</h2>
 
         <div className="admin-grid">
-
-          <div className="admin-card" onClick={() => navigate("/admin/users")}>
-            👤 Users Management
-            <span>Profiles • Dashboard Data</span>
+          <div
+            className="admin-box"
+            onClick={() => navigate("/admin/reports")}
+          >
+            📊 View Reports
           </div>
 
-          <div className="admin-card" onClick={() => navigate("/admin/inventory")}>
-            🧴 Inventory Control
-            <span>Add • Edit • Pricing</span>
+          <div
+            className="admin-box"
+            onClick={() => navigate("/admin/inventory")}
+          >
+            🧴 Manage Inventory
           </div>
 
-          <div className="admin-card" onClick={() => navigate("/admin/consultations")}>
-            🤖 AI Consultations
-            <span>Symptoms • AI Responses</span>
+          <div
+            className="admin-box"
+            onClick={() => navigate("/admin/orders")}
+          >
+            📦 View Orders
           </div>
-
-          <div className="admin-card" onClick={() => navigate("/admin/orders")}>
-            📦 Orders & Payments
-            <span>All Purchases</span>
-          </div>
-
         </div>
 
+        <button className="logout-btn" onClick={logout}>
+          Logout
+        </button>
       </div>
     </div>
   );
