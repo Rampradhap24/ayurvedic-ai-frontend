@@ -16,7 +16,7 @@ function Navbar() {
       {/* LEFT */}
       <div className="nav-left">
         <span className="nav-logo">🌿</span>
-        <span className="nav-title">Ayurvedic AI Healer</span>
+        <span className="nav-title">Ayurvedic Store</span>
       </div>
 
       {/* CENTER */}

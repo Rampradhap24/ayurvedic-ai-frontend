@@ -1,11 +1,11 @@
-const admin = (req, res, next) => {
-  if (req.user && req.user.role === "admin") {
-    return next();
-  }
-
-  return res.status(403).json({
-    message: "Admin access denied",
-  });
-};
-
-export default admin;
+export const protectAdmin = (req, res, next) => {
+    const role = req.headers.role;
+  
+    if (role !== "admin") {
+      return res.status(403).json({
+        message: "Admin access only",
+      });
+    }
+  
+    next();
+  };

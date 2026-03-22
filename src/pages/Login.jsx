@@ -105,14 +105,14 @@ function Login() {
 
           {/* EMAIL */}
           <div className="field">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label>{text[lang].email}</label>
-          </div>
+  <input
+    type="text"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    autoComplete="off"
+  />
+  <label>Email</label>
+</div>
 
           {/* PASSWORD */}
           <div className="field">

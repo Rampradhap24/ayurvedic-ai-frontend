@@ -1,13 +1,13 @@
 import express from "express";
-import { protect } from "../middleware/auth.middleware.js";
 import {
   createAppointment,
-  getMyAppointments,
+  getUserAppointments,
 } from "../controllers/appointment.controller.js";
 
 const router = express.Router();
 
-router.post("/", protect, createAppointment);
-router.get("/my", protect, getMyAppointments);
+// ❌ NO protectUser here
+router.post("/", createAppointment);
+router.get("/user", getUserAppointments);
 
 export default router;

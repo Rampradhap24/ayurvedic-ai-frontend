@@ -204,4 +204,40 @@
   .appointment-history {
     max-height: 260px;
   }
+  /* Tabs */
+.tab-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.tab {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #eee;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: #7ed957;
+  color: #000;
+  font-weight: 600;
+}
+
+/* Status */
+.status {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.status.pending {
+  background: #ffc107;
+}
+
+.status.accepted {
+  background: #7ed957;
+}
 }

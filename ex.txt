@@ -1,0 +1,157 @@
+1️⃣ Symptom:
+
+“My insulin secretion coefficient is low.”
+
+✔ Expected Category: Blood Sugar
+✔ Expected Medicines:
+	•	Anti Sugar
+	•	Sugar Control
+	•	NT Diaba
+
+⸻
+
+2️⃣ Symptom:
+
+“My blood sugar coefficient is high.”
+
+✔ Category: Blood Sugar
+✔ Expected Medicines:
+	•	Anti Diabetic
+	•	Anti Sugar
+	•	Sugar Control
+
+⸻
+
+3️⃣ Symptom:
+
+“Urine sugar coefficient is elevated.”
+
+✔ Category: Blood Sugar
+✔ Expected Medicines:
+	•	NT Diaba
+	•	Sugar Control
+
+⸻
+
+4️⃣ Symptom:
+
+“My cholesterol crystal level is high.”
+
+✔ Category: Cardiovascular
+✔ Expected Medicines:
+	•	Cholestrium Care
+	•	Heart Care
+
+⸻
+
+5️⃣ Symptom:
+
+“I have high blood fat.”
+
+✔ Category: Cardiovascular
+✔ Expected Medicines:
+	•	Heart Care
+	•	Garlic Care
+
+⸻
+
+6️⃣ Symptom:
+
+“My blood viscosity is increased.”
+
+✔ Category: Cardiovascular
+✔ Expected Medicines:
+	•	BP Care
+	•	Heart Care
+
+⸻
+
+7️⃣ Symptom:
+
+“My vascular resistance is high.”
+
+✔ Category: Cardiovascular
+✔ Expected Medicine:
+	•	Heart Care
+
+⸻
+
+8️⃣ Symptom:
+
+“My myocardial blood demand is high.”
+
+✔ Category: Cardiovascular
+✔ Expected Medicine:
+	•	Hridya Amrit
+
+⸻
+
+9️⃣ Symptom:
+
+“Stroke volume is low.”
+
+✔ Category: Cardiovascular
+✔ Expected Medicines:
+	•	Heart Care
+	•	Hridya Amrit
+
+⸻
+
+🔟 Symptom:
+
+“My free thyroxine level is low.”
+
+✔ Category: Thyroid
+✔ Expected Medicine:
+	•	Thyroid Care
+
+⸻
+
+1️⃣1️⃣ Symptom:
+
+“My vitamin D3 level is low.”
+
+✔ Category: Vitamins
+✔ Expected Medicine:
+	•	High Solar Energy Plus
+
+⸻
+
+1️⃣2️⃣ Symptom:
+
+“Vitamin C deficiency.”
+
+✔ Category: Vitamins
+✔ Expected Medicine:
+	•	High Vitamin C
+
+⸻
+
+1️⃣3️⃣ Symptom:
+
+“Immunoglobulin index is low.”
+
+✔ Category: Immune System
+✔ Expected Medicine:
+	•	Immunorich
+
+⸻
+
+1️⃣4️⃣ Symptom:
+
+“My tonsil immune index is weak.”
+
+✔ Category: Immune System
+✔ Expected Medicine:
+	•	Tonsiwin Syrup
+
+⸻
+
+1️⃣5️⃣ Symptom:
+
+“Fatty acid imbalance detected.”
+
+✔ Category: Fatty Acids
+✔ Expected Medicines:
+	•	Flax Seed
+	•	Garlic Care
