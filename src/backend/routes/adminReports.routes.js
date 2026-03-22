@@ -8,6 +8,9 @@ import {
 
 const router = express.Router();
 
+/* ================= REPORT DOWNLOAD ROUTES ================= */
+
+// 🔐 Protected routes
 router.get("/download/users", protectAdmin, downloadUsersReport);
 router.get("/download/orders", protectAdmin, downloadOrdersReport);
 router.get("/download/appointments", protectAdmin, downloadAppointmentsReport);

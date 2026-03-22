@@ -85,48 +85,71 @@ function Consultation() {
   /* ================= RENDER MESSAGE SMART ================= */
   const renderMessage = (text) => {
     if (!text) return null;
-
+  
     const parts = text.split(/(\*\*.*?\*\*)/g);
-
-    return parts.map((part, index) => {
-      if (part.startsWith("**") && part.endsWith("**")) {
-        const medName = part.replace(/\*\*/g, "");
-
-        const product = inventory.find(
-          (item) =>
-            item.name.toLowerCase() === medName.toLowerCase()
-        );
-
-        if (product) {
-          return (
-            <span key={index} className="medicine-wrapper">
-              <span className="clickable-med">
+  
+    /* 🔥 DETECT FOLLOW-UP */
+    const showFollowUp =
+      text.toLowerCase().includes("follow-up") ||
+      text.toLowerCase().includes("not improving") ||
+      text.toLowerCase().includes("consult a doctor");
+  
+    return (
+      <>
+        {parts.map((part, index) => {
+          if (part.startsWith("**") && part.endsWith("**")) {
+            const medName = part.replace(/\*\*/g, "");
+  
+            const product = inventory.find(
+              (item) =>
+                item.name.toLowerCase() ===
+                medName.toLowerCase()
+            );
+  
+            if (product) {
+              return (
+                <span key={index} className="medicine-wrapper">
+                  <span className="clickable-med">
+                    {medName}
+                  </span>
+  
+                  <button
+                    className="mini-buy-btn"
+                    onClick={() => addToCart(product)}
+                  >
+                    🛒
+                  </button>
+                </span>
+              );
+            }
+  
+            return (
+              <b key={index} className="med-highlight">
                 {medName}
-              </span>
-
-              <button
-                className="mini-buy-btn"
-                onClick={() => {
-                  addToCart(product);
-                }}
-              >
-                🛒
-              </button>
-            </span>
-          );
-        }
-
-        return (
-          <b key={index} className="med-highlight">
-            {medName}
-          </b>
-        );
-      }
-
-      return <span key={index}>{part}</span>;
-    });
+              </b>
+            );
+          }
+  
+          return <span key={index}>{part}</span>;
+        })}
+  
+        {/* 🔥 FOLLOW-UP BOX */}
+        {showFollowUp && (
+          <div className="followup-box">
+            ⏳ Take medicine regularly for 2–3 days.
+            <br />
+            If symptoms are not improving →
+            <button
+              className="consult-doctor-btn"
+              onClick={() => navigate("/doctors")}
+            >
+              🩺 Consult Doctor
+            </button>
+          </div>
+        )}
+      </>
+    );
   };
-
   /* ================= SEND MESSAGE ================= */
   const sendMessage = async () => {
     if (!input.trim()) return;

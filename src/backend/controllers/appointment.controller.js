@@ -1,31 +1,47 @@
 import Appointment from "../models/Appointment.js";
 
-/* CREATE APPOINTMENT */
+/* ================= CREATE ================= */
 export const createAppointment = async (req, res) => {
   try {
-    const appointment = await Appointment.create({
-      user: req.user._id,
-      doctor: req.body.doctor,
-      specialization: req.body.specialization,
-      date: req.body.date,
-      time: req.body.time,
+    const userId = req.headers.user;
+    const { doctorName, date, time } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ message: "User ID missing" });
+    }
+
+    const appt = await Appointment.create({
+      user: userId,
+      doctorName,
+      date,
+      time,
+      status: "Pending",
     });
 
-    res.status(201).json(appointment);
+    res.json(appt);
+
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: err.message });
   }
 };
 
-/* GET MY APPOINTMENTS */
-export const getMyAppointments = async (req, res) => {
+/* ================= GET USER ================= */
+export const getUserAppointments = async (req, res) => {
   try {
-    const appointments = await Appointment.find({
-      user: req.user._id,
-    }).sort({ createdAt: -1 });
+    const userId = req.headers.user;
 
-    res.json(appointments);
+    if (!userId) {
+      return res.status(400).json({ message: "Invalid userId" });
+    }
+
+    const data = await Appointment.find({ user: userId })
+      .sort({ createdAt: -1 });
+
+    res.json(data);
+
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: err.message });
   }
 };

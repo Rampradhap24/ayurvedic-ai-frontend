@@ -1,4 +1,5 @@
 import express from "express";
+import multer from "multer";
 import {
   getInventory,
   getAllInventory,
@@ -9,13 +10,31 @@ import {
 
 const router = express.Router();
 
-/* ================= USER ROUTE ================= */
-router.get("/", getInventory); // user store view (only active)
+/* ================= MULTER CONFIG ================= */
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "src/backend/uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
 
-/* ================= ADMIN ROUTES ================= */
-router.get("/admin/all", getAllInventory); // admin view all
-router.post("/", addItem); // add medicine
-router.put("/:id", updateItem); // edit medicine
-router.delete("/:id", deleteItem); // delete medicine
+const upload = multer({ storage });
+
+/* ================= USER ================= */
+router.get("/", getInventory);
+
+/* ================= ADMIN ================= */
+router.get("/admin/all", getAllInventory);
+
+/* ✅ ADD MEDICINE WITH IMAGE UPLOAD */
+router.post("/admin", upload.single("image"), addItem);
+
+/* UPDATE (NO IMAGE CHANGE) */
+router.put("/admin/:id", updateItem);
+
+/* DELETE */
+router.delete("/admin/:id", deleteItem);
 
 export default router;

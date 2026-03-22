@@ -11,7 +11,7 @@ export const saveConsultation = async (req, res) => {
       return res.status(400).json({ message: "Message required" });
     }
 
-    /* 1️⃣ AI explanation only */
+    /* 1️⃣ AI RESPONSE */
     const aiReplyRaw = await getAIResponse(message);
 
     if (!aiReplyRaw) {
@@ -20,7 +20,7 @@ export const saveConsultation = async (req, res) => {
       });
     }
 
-    /* 2️⃣ Match parameter from JSON */
+    /* 2️⃣ MATCH MEDICINES */
     const matchedParameter = findParameterMatch(message);
 
     let kevaMedicines = [];
@@ -29,18 +29,29 @@ export const saveConsultation = async (req, res) => {
       kevaMedicines = matchedParameter.kevaMedicines;
     }
 
-    /* 3️⃣ Append controlled medicines */
+    /* 3️⃣ BUILD FINAL RESPONSE */
     let finalReply = aiReplyRaw;
 
+    /* ✅ ADD MEDICINES */
     if (kevaMedicines.length > 0) {
       finalReply += `
 
-Keva Medicines:
+💊 Recommended Medicines:
 ${kevaMedicines.map((med) => `• **${med}**`).join("\n")}
 `;
     }
 
-    /* 4️⃣ Save to DB */
+    /* 🔥 ADD FOLLOW-UP + DOCTOR LOGIC */
+    finalReply += `
+
+⏳ Follow-up Advice:
+Take the above medicines regularly for 2–3 days.
+
+If symptoms are not improving or worsen,
+please consult a doctor for proper diagnosis.
+`;
+
+    /* 4️⃣ SAVE TO DB */
     const consultation = await Consultation.create({
       user: req.user._id,
       messages: [
@@ -54,6 +65,7 @@ ${kevaMedicines.map((med) => `• **${med}**`).join("\n")}
       reply: finalReply,
       medicines: kevaMedicines,
       consultationId: consultation._id,
+      suggestDoctor: true, // 🔥 used in frontend
     });
 
   } catch (err) {
@@ -70,7 +82,9 @@ export const getMyConsultations = async (req, res) => {
     }).sort({ createdAt: -1 });
 
     res.json(consultations);
+
   } catch (err) {
+    console.error("Fetch consultations error:", err);
     res.status(500).json({ message: err.message });
   }
 };
@@ -82,9 +96,14 @@ export const clearMyConsultations = async (req, res) => {
       user: req.user._id,
     });
 
-    res.json({ message: "Chat history cleared successfully" });
+    res.json({
+      message: "Chat history cleared successfully",
+    });
+
   } catch (err) {
     console.error("Clear chat error:", err);
-    res.status(500).json({ message: "Failed to clear chat" });
+    res.status(500).json({
+      message: "Failed to clear chat",
+    });
   }
 };

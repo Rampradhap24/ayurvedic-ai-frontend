@@ -1,39 +1,36 @@
-/* ================= FONTS ================= */
+/* ================= GOOGLE FONTS ================= */
 @import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@300;400;500&display=swap");
 
-/* ================= GLOBAL ================= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* ================= BACKGROUND ================= */
-.login-bg {
-  min-height: 100vh;
+/* ================= LOGIN CONTAINER ================= */
+.login-container {
   display: flex;
-  justify-content: center;   /* center horizontally */
-  align-items: center;       /* center vertically */
-  background:
-    linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
-    url("../assets/ayurveda-bg.jpg");
-  background-size: cover;
-  background-position: center;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
+.login-bg {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
+                url("/src/assets/ayurveda-bg.jpg"); /* ✅ FIX */
+  
+    background-size: cover;
+    background-position: center;
+  }
 
-/* ================= CARD ================= */
+/* ================= LOGIN CARD ================= */
 .login-card {
-  background: rgba(30, 28, 28, 0.95);
+  background: rgba(30, 28, 28, 0.96);
   padding: 45px 40px;
   width: 380px;
-  border-radius: 18px;
+  border-radius: 16px;
   text-align: center;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-  transition: 0.3s ease;
-}
 
-.login-card:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
 /* ================= TITLE ================= */
@@ -53,26 +50,19 @@
   margin-bottom: 28px;
 }
 
-/* ================= ERROR ================= */
-.login-error {
-  color: #ff6b6b;
-  margin-bottom: 12px;
-  font-size: 13px;
-}
-
 /* ================= INPUT ================= */
 .login-card input {
   font-family: "Inter", sans-serif;
   width: 100%;
   padding: 13px 14px;
   margin-bottom: 16px;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid #444;
   font-size: 14px;
   outline: none;
-  background: #1f1f1f;
+
+  background: rgba(255,255,255,0.05);
   color: white;
-  transition: 0.3s;
 }
 
 .login-card input::placeholder {
@@ -81,7 +71,7 @@
 
 .login-card input:focus {
   border-color: #7ed957;
-  box-shadow: 0 0 0 2px rgba(126, 217, 87, 0.2);
+  box-shadow: 0 0 0 2px rgba(126,217,87,0.2);
 }
 
 /* ================= BUTTON ================= */
@@ -90,10 +80,12 @@
   width: 100%;
   padding: 13px;
   margin-top: 5px;
+
   background: linear-gradient(135deg,#7ed957,#9be27a);
   color: #1b3d2b;
+
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -102,12 +94,7 @@
 
 .login-card button:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 25px rgba(126,217,87,.4);
-}
-
-.login-card button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+  box-shadow: 0 8px 20px rgba(126,217,87,.4);
 }
 
 /* ================= FOOTER ================= */
@@ -116,10 +103,4 @@
   font-family: "Inter", sans-serif;
   font-size: 13px;
   color: #aaa;
-}
-
-.login-note span {
-  color: #7ed957;
-  font-weight: 500;
-  cursor: pointer;
 }

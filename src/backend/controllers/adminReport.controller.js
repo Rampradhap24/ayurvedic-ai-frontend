@@ -18,15 +18,18 @@ export const exportUsersCSV = async (req, res) => {
       csv += `${new Date(user.createdAt).toLocaleDateString()}\n`;
     });
 
-    res.setHeader("Content-Type", "text/csv");
+    // ✅ HEADERS (FIXED)
+    res.setHeader("Content-Type", "text/csv; charset=utf-8");
     res.setHeader(
       "Content-Disposition",
       "attachment; filename=users_report.csv"
     );
 
-    res.status(200).send(csv);
+    // ✅ SEND FILE
+    res.status(200).end(csv);
 
   } catch (err) {
+    console.error("Users CSV Error:", err);
     res.status(500).json({ message: "Users CSV export failed" });
   }
 };
@@ -47,15 +50,17 @@ export const exportOrdersCSV = async (req, res) => {
       csv += `${new Date(order.createdAt).toLocaleDateString()}\n`;
     });
 
-    res.setHeader("Content-Type", "text/csv");
+    // ✅ HEADERS
+    res.setHeader("Content-Type", "text/csv; charset=utf-8");
     res.setHeader(
       "Content-Disposition",
       "attachment; filename=orders_report.csv"
     );
 
-    res.status(200).send(csv);
+    res.status(200).end(csv);
 
   } catch (err) {
+    console.error("Orders CSV Error:", err);
     res.status(500).json({ message: "Orders CSV export failed" });
   }
 };
@@ -75,15 +80,17 @@ export const exportAppointmentsCSV = async (req, res) => {
       csv += `${appt.status}\n`;
     });
 
-    res.setHeader("Content-Type", "text/csv");
+    // ✅ HEADERS
+    res.setHeader("Content-Type", "text/csv; charset=utf-8");
     res.setHeader(
       "Content-Disposition",
       "attachment; filename=appointments_report.csv"
     );
 
-    res.status(200).send(csv);
+    res.status(200).end(csv);
 
   } catch (err) {
+    console.error("Appointments CSV Error:", err);
     res.status(500).json({ message: "Appointments CSV export failed" });
   }
 };

@@ -35,6 +35,8 @@ import profileRoutes from "./routes/profile.routes.js";
 import appointmentRoutes from "./routes/appointment.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
+import adminOrdersRoutes from "./routes/adminOrders.routes.js";
+import adminAppointmentsRoutes from "./routes/adminAppointments.routes.js";
 
 /* ================= CREATE APP ================= */
 const app = express();
@@ -55,7 +57,7 @@ app.use(
 );
 
 app.use(express.json());
-
+app.use("/uploads", express.static("src/backend/uploads"));
 /* ================= HEALTH CHECK ================= */
 app.get("/", (req, res) => {
   res.json({ message: "🌿 Ayurvedic AI Backend Running" });
@@ -70,6 +72,9 @@ app.use("/api/profile", profileRoutes);
 app.use("/api/appointment", appointmentRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+app.use("/uploads", express.static("uploads"));
+app.use("/api/admin/orders", adminOrdersRoutes); // ✅ ADD THIS
+app.use("/api/admin/appointments", adminAppointmentsRoutes);
 
 /* ================= GLOBAL ERROR HANDLER ================= */
 app.use((err, req, res, next) => {

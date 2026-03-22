@@ -1,54 +1,49 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../styles/admin.css";
 
 function ReportsAdmin() {
   const navigate = useNavigate();
-
-  const [usersCount, setUsersCount] = useState(0);
-  const [ordersCount, setOrdersCount] = useState(0);
-  const [appointmentsCount, setAppointmentsCount] = useState(0);
-
-  /* ================= LOAD SUMMARY ================= */
-  useEffect(() => {
-    const loadSummary = async () => {
-      try {
-        const headers = { role: "admin" };
-
-        const usersRes = await fetch(
-          "http://localhost:5001/admin/reports/download/users",
-          { headers }
-        );
-
-        const ordersRes = await fetch(
-          "http://localhost:5001/admin/reports/download/orders",
-          { headers }
-        );
-
-        const appointmentsRes = await fetch(
-          "http://localhost:5001/admin/reports/download/appointments",
-          { headers }
-        );
-
-        // Just checking if routes respond
-        if (usersRes.ok) setUsersCount(1);
-        if (ordersRes.ok) setOrdersCount(1);
-        if (appointmentsRes.ok) setAppointmentsCount(1);
-
-      } catch (err) {
-        console.error("Summary load error", err);
-      }
-    };
-
-    loadSummary();
-  }, []);
+  const [loading, setLoading] = useState(false);
 
   /* ================= DOWNLOAD FUNCTION ================= */
-  const downloadReport = (type) => {
-    window.open(
-      `http://localhost:5001/admin/reports/download/${type}`,
-      "_blank"
-    );
+  const downloadReport = async (type) => {
+    try {
+      setLoading(true);
+
+      const res = await fetch(
+        `http://localhost:5001/admin/reports/download/${type}`
+      );
+
+      console.log("STATUS:", res.status);
+
+      if (!res.ok) {
+        const text = await res.text();
+        console.log("ERROR:", text);
+        alert("❌ Download failed");
+        return;
+      }
+
+      const blob = await res.blob();
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+
+      a.href = url;
+      a.download = `${type}-report.csv`;
+
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      window.URL.revokeObjectURL(url);
+
+    } catch (err) {
+      console.error("Download error:", err);
+      alert("❌ Download error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const logout = () => {
@@ -69,47 +64,62 @@ function ReportsAdmin() {
             </p>
           </div>
 
-          <button className="logout-btn" onClick={logout}>
-            Logout
-          </button>
+          <div style={{ display: "flex", gap: "10px" }}>
+            
+            {/* ✅ FIXED BACK BUTTON */}
+            <button
+              className="admin-btn"
+              style={{ width: "auto", padding: "6px 12px" }}
+              onClick={() => navigate("/admin/dashboard")}
+            >
+              ⬅ Back
+            </button>
+
+            <button className="logout-btn" onClick={logout}>
+              Logout
+            </button>
+          </div>
         </div>
 
-        {/* ===== SUMMARY CARDS ===== */}
+        {/* ===== CARDS ===== */}
         <div className="admin-grid">
 
           <div className="admin-card">
-            👤 Users Report
+            <h3>👤 Users Report</h3>
             <span>All registered users data</span>
-            <br />
+
             <button
               className="admin-btn"
+              disabled={loading}
               onClick={() => downloadReport("users")}
             >
-              Download Users CSV
+              {loading ? "Downloading..." : "Download Users CSV"}
             </button>
           </div>
 
           <div className="admin-card">
-            📦 Orders Report
+            <h3>📦 Orders Report</h3>
             <span>All order transactions</span>
-            <br />
+
             <button
               className="admin-btn"
+              disabled={loading}
               onClick={() => downloadReport("orders")}
             >
-              Download Orders CSV
+              {loading ? "Downloading..." : "Download Orders CSV"}
             </button>
           </div>
 
           <div className="admin-card">
-            🩺 Appointments Report
+            <h3>🩺 Appointments Report</h3>
             <span>Doctor appointments history</span>
-            <br />
+
             <button
               className="admin-btn"
+              disabled={loading}
               onClick={() => downloadReport("appointments")}
             >
-              Download Appointments CSV
+              {loading ? "Downloading..." : "Download Appointments CSV"}
             </button>
           </div>
 

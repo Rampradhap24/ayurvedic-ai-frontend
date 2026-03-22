@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/admin.css";
-
+import "../styles/adminlogin.css";
+import bg from "../assets/ayurveda-bg.jpg";
 function AdminLogin() {
   const navigate = useNavigate();
 
@@ -31,24 +31,21 @@ function AdminLogin() {
         }),
       });
 
-      // Safely parse response
-      const text = await res.text();
-      let data;
-
-      try {
-        data = JSON.parse(text);
-      } catch {
-        throw new Error("Invalid server response");
-      }
+      const data = await res.json();
 
       if (!res.ok) {
         throw new Error(data.message || "Login failed");
       }
 
-      // Save admin session
-      localStorage.setItem("admin", "true");
+      /* ✅ IMPORTANT FIX (STORE TOKEN) */
+      localStorage.setItem(
+        "admin",
+        JSON.stringify({
+          token: data.token,
+          username: data.username,
+        })
+      );
 
-      // Redirect
       navigate("/admin/dashboard");
 
     } catch (err) {
@@ -59,14 +56,17 @@ function AdminLogin() {
   };
 
   return (
-    <div className="admin-bg">
-      <div className="admin-login">
+    <div className="login-bg">
 
-        <h2>Admin Login</h2>
-        <p className="sub">Ayurvedic AI Healer – Admin Panel</p>
+      <div className="login-card">
+
+        <h2 className="login-title">🌿 Admin Login</h2>
+        <p className="login-subtitle">
+          Ayurvedic AI Healer – Admin Panel
+        </p>
 
         {error && (
-          <p style={{ color: "#ff6b6b", marginBottom: "10px" }}>
+          <p className="login-error">
             {error}
           </p>
         )}
@@ -85,11 +85,7 @@ function AdminLogin() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button
-          className="admin-btn"
-          onClick={handleLogin}
-          disabled={loading}
-        >
+        <button onClick={handleLogin} disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </button>
 
